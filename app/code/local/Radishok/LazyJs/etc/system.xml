@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Phoenix
+ * @package     Phoenix_Moneybookers
+ * @copyright   Copyright (c) 2014 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <tabs>
+        <radishok>
+            <label>Radishok</label>
+            <sort_order>201</sort_order>
+        </radishok>
+    </tabs>
+    <sections>
+        <radishoklazyjs>
+            <label>LazyJs</label>
+            <tab>radishok</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings>
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active>
+                            <label>Module Enabled(version: 0.0.0.5)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <defer_js>
+                            <label>Defer js</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[
+                                No = do not defer js, only move javascript code before &lt;/body&gt; ends.<br/> 
+                                <span style="display:none;" id="radishok_warning">Please test this option before going live. It may broke some js.</span>
+                                <script>
+                                    (function(){
+                                        function showradishokwarning(){
+                                            var select = document.getElementById('radishoklazyjs_settings_defer_js');
+                                            var el = document.getElementById('radishok_warning');
+                                            if(select.options[select.selectedIndex].value == 1){
+                                                el.style = 'color:#d20000;';
+                                            } else {
+                                                el.style = 'display:none;';
+                                            }
+                                        }
+                                        document.getElementById('radishoklazyjs_settings_defer_js').addEventListener('change', showradishokwarning, false);
+                                        showradishokwarning();
+                                    })();
+                                </script>
+                                ]]>
+                            </comment>
+                        </defer_js>
+                        <disabled_pages>
+                            <label>Disabled on pages</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Each request path on new line<br/>Example: <br/>/contacts<br/>/checkout/cart*<br/>(* character can be used at the end of line)]]></comment>
+                        </disabled_pages>
+                    </fields>
+                </settings>
+            </groups>
+        </radishoklazyjs>
+    </sections>
+</config>

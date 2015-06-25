@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Radishok_LazyJs
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Radishok
+ * @package     Radishok_LazyJs
+ * @copyright   Copyright (c) 2014 Radishok
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Radishok_LazyJs>
+            <version>0.0.0.5</version>
+        </Radishok_LazyJs>
+    </modules>
+    <global>
+        <models>
+            <radishok_lazyjs>
+                <class>Radishok_LazyJs_Model</class>
+            </radishok_lazyjs>
+        </models>
+    </global>
+    <frontend>        
+        <events>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <radishok_lazyjs_after_html>
+                        <class>radishok_lazyjs/observer</class>
+                        <method>afterToHtml</method>
+                    </radishok_lazyjs_after_html>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </frontend>
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <radishoklazyjs>
+                                            <title>Radishok LazyJs</title>
+                                        </radishoklazyjs>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <default>
+        <radishoklazyjs>
+            <settings>
+                <active>1</active>
+                <defer_js>0</defer_js>
+            </settings>
+        </radishoklazyjs>
+    </default>
+</config>

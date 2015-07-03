@@ -1,7 +1,7 @@
 <?php
 class Space48_Lazyjs_Model_Observer extends Varien_Object
 {
-    const MODULE_ENABLED = false;
+    const MODULE_ENABLED = true;
 
     protected $_allJs    = array();
 

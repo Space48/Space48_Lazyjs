@@ -1,9 +1,9 @@
 <?php
 class Space48_Lazyjs_Model_Observer extends Varien_Object
 {
-    const MODULE_ENABLED    = false;
+    const MODULE_ENABLED = true;
 
-    protected $_allJs       = array();
+    protected $_allJs    = array();
 
 
     public function beforeSendResponse($output)
@@ -14,6 +14,11 @@ class Space48_Lazyjs_Model_Observer extends Varien_Object
 
         // do not process partial outputs (e.g. ajax requests)
         if (strripos($output, '</body>') === false) {
+            return $output;
+        }
+
+        // do not process admin pages
+        if (stripos($output, '/adminhtml/') !== false) {
             return $output;
         }
 
@@ -29,7 +34,12 @@ class Space48_Lazyjs_Model_Observer extends Varien_Object
 
     protected function _replaceCallbackMain($matches)
     {
-        if (strpos($matches[0],'<!--[if')===false && strpos($matches[0],'<![endif]-->')===false) {
+        // do not process conditional JS and Google Analytics tracking code
+        if (
+            strpos($matches[0], '<!--[if') === false &&
+            strpos($matches[0], '<![endif]-->') === false &&
+            strpos($matches[0], '_gaq.push') === false
+        ) {
             $callback = array($this, '_replaceCallback');
 
             return call_user_func($callback, $matches);
